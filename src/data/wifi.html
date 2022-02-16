@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>WiFi Admin-Tools</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="smart-fleets" />
+    <link rel="icon" href="esp32.png" type="image/x-icon">
+    <!-- GLOBAL STYLES -->
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-switch.css" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="MoneAdmin.css" />
+    <link rel="stylesheet" href="font-awesome.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <!--END GLOBAL STYLES -->
+
+</head>
+<!-- END  HEAD-->
+<!-- BEGIN BODY-->
+
+<body class="padTop53 ">
+    <!-- MAIN WRAPPER -->
+    <div id="wrap">
+        <!-- HEADER SECTION -->
+        <div id="top">
+            <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
+                <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
+                    <i class="icon-align-justify"></i>
+                </a>
+                <!-- LOGO SECTION -->
+                <header class="navbar-header">
+                    <a href="/" class="navbar-brand">
+                        <img src="logo.png" alt="" /></a>
+                </header>
+                <!-- END LOGO SECTION -->
+                <ul class="nav navbar-top-links navbar-right">
+                    <!--ADMIN SETTINGS SECTIONS -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-user "></i>&nbsp; <i class="icon-chevron-down "></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="esp-admin"><i class="icon-user"></i> Usuario </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="esp-logout"><i class="icon-signout"></i> Salir </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <!--END ADMIN SETTINGS -->
+                </ul>
+            </nav>
+        </div>
+        <!-- END HEADER SECTION -->
+        <!-- MENU SECTION -->
+        <div id="left">
+            <div class="media user-media well-small">
+                <a class="user-link" href="/">
+                    <img class="media-object img-thumbnail user-img" alt="User Picture" src="esp32.png" />
+                </a>
+                <br />
+                <div class="media-body">
+                    <h5 class="media-heading">ESP32</h5>
+                    <ul class="list-unstyled user-info">
+                        <li>
+                            <a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a> Online
+                        </li>
+                    </ul>
+                </div>
+                <br />
+            </div>
+            <ul id="menu" class="collapse">
+                <li class="panel">
+                    <a href="/">
+                        <i class="icon-th-large"></i> Dashboard
+                    </a>
+                </li>
+                <li class="panel active">
+                    <a href="esp-wifi">
+                        <i class="icon-signal"></i> Wifi
+                    </a>
+                </li>
+                <li class="panel">
+                    <a href="esp-mqtt">
+                        <i class="icon-sitemap"></i> MQTT
+                    </a>
+                </li>
+                <li class="panel ">
+                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav">
+                        <i class="icon-cog"> </i> Administrar
+                        <span class="pull-right">
+                          <i class="icon-angle-left"></i>
+                    </a>
+                    <ul class="collapse" id="component-nav">
+                        <li class=""><a href="esp-device"><i class="icon-angle-right"></i> Dispositivo </a></li>
+                        <li class=""><a href="esp-restore"><i class="icon-angle-right"></i> Ajustes de fabrica </a></li>
+                        <li class=""><a href="esp-restart"><i class="icon-angle-right"></i> Reinicio </a></li>
+                        <li class=""><a href="esp-admin"><i class="icon-angle-right"></i> Contraseña </a></li>
+                    </ul>
+                </li>
+                <li class="panel">
+                    <a href="esp-logout">
+                        <i class="icon-signout"></i> Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--END MENU SECTION -->
+        <!--PAGE CONTENT -->
+        <div id="content">
+            <div class="inner" style="min-height:1200px;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Configuración de la red inalámbrica</h2>
+                    </div>
+                </div>
+                <hr>
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="icon-signal"></i> Configuración de red WiFi cliente y en modo AP
+                
+        </div>
+        <div class="panel-body">
+            <br>
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="#" class="control-label col-lg-3"></label>
+                    <div class="col-lg-5">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#myModal" ><i class="icon-search"></i> Buscar </button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_ssid">
+                    <label for="ssid" class="control-label col-lg-3">Nombre de la red inalámbrica:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control" type="text" id="ssid" name="ssid" value="" placeholder="Nombre (SSID)"/>
+                       
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_pw">
+                    <label for="pw" class="control-label col-lg-3">Contraseña:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control" type="password" name="pw" id="pw" placeholder="********"/>
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-3">IP Estatico</label>
+                    <div class="col-lg-5">
+                        <div class="make-switch switch-mini" data-on="primary" data-off="danger">
+                            <input type="checkbox" id="staticIP" onchange="ipenable();" />
+                        </div>
+                        </div>
+                </div>
+
+                <div class="form-group" id="form_local_ip">
+                    <label for="local_ip" class="control-label col-lg-3">Direccion IP:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ip" type="text" id="local_ip" name="local_ip" value="" placeholder="Direccion IP"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_subnet">
+                    <label for="subnet" class="control-label col-lg-3">Mascara de subred:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ip" type="text" id="subnet" value="" name="subnet" placeholder="Mascara de subred"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_gateway">
+                    <label for="gateway" class="control-label col-lg-3">Puerta de enlace:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ip" type="text" id="gateway" value="" name="gateway" placeholder="Puerta de enlace"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_primaryDNS">
+                    <label for="primaryDNS" class="control-label col-lg-3">DNS primario:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ip" type="text" id="primaryDNS" name="primaryDNS" value="" placeholder="DNS primario"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_secondaryDNS">
+                    <label for="secondaryDNS" class="control-label col-lg-3">DNS secundario:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ip" type="text" id="secondaryDNS" name="secondaryDNS" value="" placeholder="DNS Secundario"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="text1" class="control-label col-lg-3">Modo AP:</label>
+                    <div class="col-lg-5">
+                        <div class="make-switch switch-mini" data-on="primary" data-off="danger">
+                            <input type="checkbox"  id="accessPoint" onchange="apenable();" />
+                        </div>
+                        </div>
+                </div>
+
+                <div class="form-group" id="form_nameap">
+                    <label for="nameap" class="control-label col-lg-3">Nombre de la AP:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ap" type="text" id="nameap" name="nameap" value="" placeholder="Nombre (SSID) AP"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_passwordap">
+                    <label for="passwordap" class="control-label col-lg-3">Contraseña AP:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ap" type="password" name="passwordap" id="pw" placeholder="********"/>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form_canalap">
+                    <label for="canalap" class="control-label col-lg-3">Canal AP:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ap" type="number" id="canalap" name="canalap" value="" placeholder="Canal: 1 - 13"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="hiddenap" class="control-label col-lg-3">Visibilidad:</label>
+                    <div class="col-lg-5">
+                        <div class="make-switch switch-mini" data-on="primary" data-off="danger">
+                            <input type="checkbox" id="apvisible" onchange="apvisien();" />
+                        </div>
+                        </div>
+                </div>
+                
+                <div class="form-group" id="form_connetap">
+                    <label for="connetap" class="control-label col-lg-3">Numero de conexiones:</label>
+                    <div class="col-lg-5">
+                        <input class="form-control ap" type="number" id="connetap" name="connetap" value="" placeholder="Min: 0 - Max: 8"/>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="#" class="control-label col-lg-3"></label>
+                    <div class="col-lg-5">
+                        <button type="submit" class="btn btn-primary"><i class="icon-save icon-white"></i> Guardar </button>
+                    </div>
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!--END PAGE CONTENT -->
+    </div>
+    <!--END MAIN WRAPPER -->
+    <!-- FOOTER -->
+    <div id="footer">
+        <p>&copy; Smart-Fleets &nbsp;2022 &nbsp;</p>
+    </div>
+    <!--END FOOTER -->
+    <!-- GLOBAL SCRIPTS -->
+    <script src="jquery-2.0.3.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="modernizr-2.6.2.min.js"></script>
+    <script src="bootstrap-switch.min.js"></script>
+    <script src="script.js"></script>
+    <!-- END GLOBAL SCRIPTS -->
+</body>
+<!-- END BODY-->
+
+</html>
